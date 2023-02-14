@@ -28,9 +28,15 @@ class DefaultPreferences(
             .apply()
     }
 
-    override fun saveHeight(height: Int) {
+    override fun saveHeightFeet(feet: Int) {
         sharedPref.edit()
-            .putInt(Preferences.KEY_HEIGHT, height)
+            .putInt(Preferences.KEY_HEIGHT_FEET, feet)
+            .apply()
+    }
+
+    override fun saveHeightInches(inches: Int) {
+        sharedPref.edit()
+            .putInt(Preferences.KEY_HEIGHT_INCHES, inches)
             .apply()
     }
 
@@ -66,7 +72,8 @@ class DefaultPreferences(
 
     override fun loadUserInfo(): UserInfo {
         val age = sharedPref.getInt(Preferences.KEY_AGE, -1)
-        val height = sharedPref.getInt(Preferences.KEY_HEIGHT, -1)
+        val heightFeet = sharedPref.getInt(Preferences.KEY_HEIGHT_FEET, -1)
+        val heightInches = sharedPref.getInt(Preferences.KEY_HEIGHT_INCHES, -1)
         val weight = sharedPref.getFloat(Preferences.KEY_WEIGHT, -1f)
         val genderString = sharedPref.getString(Preferences.KEY_GENDER, null)
         val activityLevelString = sharedPref
@@ -80,7 +87,8 @@ class DefaultPreferences(
             gender = Gender.fromString(genderString ?: "male"),
             age = age,
             weight = weight,
-            height = height,
+            heightFeet = heightFeet,
+            heightInches = heightInches,
             activityLevel = ActivityLevel.fromString(activityLevelString ?: "medium"),
             goalType = GoalType.fromString(goalType ?: "keep_weight"),
             carbRatio = carbRatio,

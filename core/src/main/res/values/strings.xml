@@ -10,7 +10,10 @@
     <string name="next">Next</string>
     <string name="whats_your_height">What\'s your height?</string>
     <string name="kg">kg</string>
+    <string name="lbs">lbs</string>
     <string name="cm">cm</string>
+    <string name="ft">ft</string>
+    <string name="in">in</string>
     <string name="error_age_cant_be_empty">The age can\'t be empty</string>
     <string name="error_height_cant_be_empty">The height can\'t be empty</string>
     <string name="error_weight_cant_be_empty">The weight can\'t be empty</string>
@@ -33,7 +36,7 @@
     <string name="snacks">Snacks</string>
     <string name="add_meal">Add %s</string>
     <string name="add">Add</string>
-    <string name="search">Search...</string>
+    <string name="search">Search&#8230;</string>
     <string name="today">Today</string>
     <string name="recent">Recent</string>
     <string name="kcal_per_100g">%dkcal / 100g</string>

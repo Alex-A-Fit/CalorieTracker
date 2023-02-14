@@ -9,7 +9,8 @@ interface Preferences {
     fun saveGender(gender: Gender)
     fun saveAge(age: Int)
     fun saveWeight(weight: Float)
-    fun saveHeight(height: Int)
+    fun saveHeightFeet(feet: Int)
+    fun saveHeightInches(inches: Int)
     fun saveActivityLevel(level: ActivityLevel)
     fun saveGoalType(type: GoalType)
     fun saveCarbRatio(ratio: Float)
@@ -22,7 +23,8 @@ interface Preferences {
         const val KEY_GENDER = "gender"
         const val KEY_AGE = "age"
         const val KEY_WEIGHT = "weight"
-        const val KEY_HEIGHT = "height"
+        const val KEY_HEIGHT_FEET = "height_feet"
+        const val KEY_HEIGHT_INCHES = "height_inches"
         const val KEY_ACTIVITY_LEVEL = "activity_level"
         const val KEY_GOAL_TYPE = "goal_type"
         const val KEY_CARB_RATIO = "carb_ratio"
