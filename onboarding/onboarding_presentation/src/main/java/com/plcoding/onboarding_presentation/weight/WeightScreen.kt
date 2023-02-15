@@ -3,8 +3,10 @@ package com.plcoding.onboarding_presentation.weight
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
@@ -16,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.plcoding.core.R
 import com.plcoding.core.util.UiEvent
@@ -26,9 +29,10 @@ import kotlinx.coroutines.flow.collect
 
 @Composable
 fun WeightScreen(
+    modifier: Modifier = Modifier,
     scaffoldState: ScaffoldState,
     onNavigate: (UiEvent.Navigate) -> Unit,
-    viewModel: WeightViewModel = hiltViewModel()
+    viewModel: WeightViewModel = hiltViewModel(),
 ) {
     val spacing = LocalSpacing.current
     val context = LocalContext.current
@@ -46,12 +50,12 @@ fun WeightScreen(
         }
     }
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(spacing.spaceLarge)
     ) {
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -59,19 +63,30 @@ fun WeightScreen(
                 text = stringResource(id = R.string.whats_your_weight),
                 style = MaterialTheme.typography.h3
             )
-            Spacer(modifier = Modifier.height(spacing.spaceMedium))
-            UnitTextField(
-                value = viewModel.weight,
-                onValueChange = viewModel::onWeightEnter,
-                unit = stringResource(
-                    id = R.string.lbs
+            Spacer(modifier = modifier.height(spacing.spaceMedium))
+            Row(
+                modifier = modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                UnitTextField(
+                    value = viewModel.weight,
+                    onValueChange = viewModel::onWeightEnter,
+                    unit = null
                 )
-            )
+                Text(text = ".", fontSize = 70.sp)
+                UnitTextField(
+                    value = viewModel.decimalWeight,
+                    onValueChange = viewModel::onWeightDecimal,
+                    unit = stringResource(id = R.string.lbs)
+                )
+            }
+
         }
         ActionButton(
             text = stringResource(id = R.string.next),
             onClick = viewModel::onNextClick,
-            modifier = Modifier.align(Alignment.BottomEnd)
+            modifier = modifier.align(Alignment.BottomEnd)
         )
     }
 }

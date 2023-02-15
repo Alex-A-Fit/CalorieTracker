@@ -17,12 +17,13 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.sp
 import com.plcoding.core_ui.LocalSpacing
+
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun UnitTextField(
     value: String,
     onValueChange: (String) -> Unit,
-    unit: String,
+    unit: String?,
     modifier: Modifier = Modifier,
     textStyle: TextStyle = TextStyle(
         color = MaterialTheme.colors.primaryVariant,
@@ -57,9 +58,11 @@ fun UnitTextField(
                 .alignBy(LastBaseline),
         )
         Spacer(modifier = Modifier.width(spacing.spaceSmall))
-        Text(
-            text = unit,
-            modifier = Modifier.alignBy(LastBaseline)
-        )
+        unit?.let {
+            Text(
+                text = unit,
+                modifier = Modifier.alignBy(LastBaseline)
+            )
+        }
     }
 }

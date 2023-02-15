@@ -7,7 +7,6 @@ import com.plcoding.core.domain.DefaultPreferences
 import com.plcoding.core.domain.preferences.Preferences
 import com.plcoding.core.domain.use_case.FilterOutDigits
 import com.plcoding.core.domain.use_case.FilterOutHeightInches
-import com.plcoding.core.domain.use_case.FilterOutWeight
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -42,11 +41,5 @@ object AppModule {
     @Singleton
     fun providesFilterOutHeightInchesUseCase(): FilterOutHeightInches{
         return FilterOutHeightInches()
-    }
-
-    @Provides
-    @Singleton
-    fun providesFilterOutWeightUseCase(): FilterOutWeight{
-        return FilterOutWeight()
     }
 }
