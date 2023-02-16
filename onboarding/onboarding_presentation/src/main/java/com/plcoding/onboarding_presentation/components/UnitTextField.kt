@@ -13,6 +13,7 @@ import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.sp
@@ -61,7 +62,9 @@ fun UnitTextField(
         unit?.let {
             Text(
                 text = unit,
-                modifier = Modifier.alignBy(LastBaseline)
+                modifier = Modifier.alignBy(LastBaseline),
+                fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.h4
             )
         }
     }

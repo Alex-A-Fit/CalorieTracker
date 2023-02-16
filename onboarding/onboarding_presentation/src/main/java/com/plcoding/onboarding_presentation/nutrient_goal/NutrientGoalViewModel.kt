@@ -21,24 +21,35 @@ class NutrientGoalViewModel @Inject constructor(
     private val preferences: Preferences,
     private val filterOutDigits: FilterOutDigits,
     private val validateNutrients: ValidateNutrients
-): ViewModel() {
+) : ViewModel() {
     var state by mutableStateOf(NutrientGoalState())
         private set
 
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
-    fun onEvent(event: NutrientGoalEvent){
-        when(event){
+    fun onEvent(event: NutrientGoalEvent) {
+        when (event) {
             is NutrientGoalEvent.OnCarbRatioEnter -> {
-                state = state.copy(
-                    carbsRatio = filterOutDigits(event.ratio)
-                )
+                if (event.ratio.length <= 2) {
+                    state = state.copy(
+                        carbsRatio = filterOutDigits(event.ratio)
+                    )
+                }
             }
             is NutrientGoalEvent.OnFatRatioEnter -> {
-                state = state.copy(
-                    fatRatio = filterOutDigits(event.ratio)
-                )
+                if (event.ratio.length <= 2) {
+                    state = state.copy(
+                        fatRatio = filterOutDigits(event.ratio)
+                    )
+                }
+            }
+            is NutrientGoalEvent.OnProteinRatioEnter -> {
+                if (event.ratio.length <= 2) {
+                    state = state.copy(
+                        proteinRatio = filterOutDigits(event.ratio)
+                    )
+                }
             }
             NutrientGoalEvent.OnNextClick -> {
                 val result = validateNutrients(
@@ -46,7 +57,7 @@ class NutrientGoalViewModel @Inject constructor(
                     proteinRatio = state.proteinRatio,
                     fatRatio = state.fatRatio
                 )
-                when (result){
+                when (result) {
                     is ValidateNutrients.Result.Success -> {
                         preferences.saveCarbRatio(result.carbsRatio)
                         preferences.saveProteinRatio(result.proteinRatio)
@@ -61,11 +72,6 @@ class NutrientGoalViewModel @Inject constructor(
                         }
                     }
                 }
-            }
-            is NutrientGoalEvent.OnProteinRatioEnter -> {
-                state = state.copy(
-                    proteinRatio = filterOutDigits(event.ratio)
-                )
             }
         }
     }
