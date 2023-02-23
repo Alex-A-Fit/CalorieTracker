@@ -1,15 +1,14 @@
-package com.plcoding.core.domain
+package com.plcoding.core.data.preferences
 
 import android.content.SharedPreferences
 import com.plcoding.core.domain.model.ActivityLevel
 import com.plcoding.core.domain.model.Gender
 import com.plcoding.core.domain.model.GoalType
 import com.plcoding.core.domain.model.UserInfo
-import com.plcoding.core.domain.preferences.Preferences
 
 class DefaultPreferences(
     private val sharedPref: SharedPreferences
-): Preferences {
+) : Preferences {
     override fun saveGender(gender: Gender) {
         sharedPref.edit()
             .putString(Preferences.KEY_GENDER, gender.name)
@@ -94,6 +93,19 @@ class DefaultPreferences(
             carbRatio = carbRatio,
             proteinRatio = proteinRatio,
             fatRatio = fatRatio
+        )
+    }
+
+    override fun saveShouldShowOnboarding(shouldShow: Boolean) {
+        sharedPref.edit()
+            .putBoolean(Preferences.KEY_SHOULD_SHOW_ONBOARDING, shouldShow)
+            .apply()
+    }
+
+    override fun loadShouldShowOnboarding(): Boolean {
+        return sharedPref.getBoolean(
+            Preferences.KEY_SHOULD_SHOW_ONBOARDING,
+            true
         )
     }
 }
